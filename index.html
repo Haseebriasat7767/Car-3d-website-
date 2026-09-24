@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurora GT — 3D Car Showcase</title>
+  <meta name="description" content="Explore the Aurora GT in interactive 3D. Rotate, zoom and change the paint colour." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <a href="#" class="logo">AURORA<span>GT</span></a>
+    <nav>
+      <a href="#specs">Specs</a>
+      <a href="#features">Features</a>
+      <a href="#contact" class="btn-small">Book a test drive</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div id="viewer" aria-label="Interactive 3D car model">
+      <div id="loader">Loading 3D model…</div>
+    </div>
+    <div class="hero-text">
+      <p class="eyebrow">All-electric grand tourer</p>
+      <h1>Aurora GT</h1>
+      <p class="lead">Drag to rotate. Pinch or scroll to zoom. Pick a colour below.</p>
+      <div class="swatches" role="group" aria-label="Paint colour">
+        <button class="swatch active" style="--c:#c1121f" data-color="#c1121f" aria-label="Racing red"></button>
+        <button class="swatch" style="--c:#0a84ff" data-color="#0a84ff" aria-label="Electric blue"></button>
+        <button class="swatch" style="--c:#e9e9ea" data-color="#e9e9ea" aria-label="Pearl white"></button>
+        <button class="swatch" style="--c:#1c1c1e" data-color="#1c1c1e" aria-label="Midnight black"></button>
+        <button class="swatch" style="--c:#f4b400" data-color="#f4b400" aria-label="Solar yellow"></button>
+      </div>
+      <label class="toggle"><input type="checkbox" id="autorotate" checked /> Auto-rotate</label>
+    </div>
+  </section>
+
+  <section id="specs" class="specs">
+    <div class="stat"><strong>2.9s</strong><span>0–100 km/h</span></div>
+    <div class="stat"><strong>620 km</strong><span>Range (WLTP)</span></div>
+    <div class="stat"><strong>780 hp</strong><span>Dual motor</span></div>
+    <div class="stat"><strong>18 min</strong><span>10–80% charge</span></div>
+  </section>
+
+  <section id="features" class="features">
+    <article>
+      <h3>Aerodynamic body</h3>
+      <p>A low, sculpted shape with a drag coefficient of 0.21 cuts through the air and adds range.</p>
+    </article>
+    <article>
+      <h3>Adaptive suspension</h3>
+      <p>Air suspension reads the road 1,000 times a second, so the ride stays calm at any speed.</p>
+    </article>
+    <article>
+      <h3>Smart cockpit</h3>
+      <p>A curved 15-inch display, over-the-air updates and a driver assistant that learns your routes.</p>
+    </article>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Book a test drive</h2>
+    <form id="lead-form">
+      <input type="text" name="name" placeholder="Your name" required />
+      <input type="email" name="email" placeholder="Email address" required />
+      <button type="submit">Request drive</button>
+    </form>
+    <p id="form-msg" class="form-msg" role="status"></p>
+  </section>
+
+  <footer>© <span id="year"></span> Aurora GT. Concept showcase.</footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("lead-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      document.getElementById("form-msg").textContent =
+        "Thanks, " + this.elements.name.value.trim() + "! We'll email you to arrange your test drive.";
+      this.reset();
+    });
+  </script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
